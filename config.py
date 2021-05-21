@@ -1,3 +1,3 @@
-KEY_SPACE = 'ten_millions_perfomance'
+KEY_SPACE = 'th_millions_perfomance'
 BASE_NAME = 'perftest'
-COUNT_UNQ_MHS = 100
+COUNT_UNQ_MHS = 1000

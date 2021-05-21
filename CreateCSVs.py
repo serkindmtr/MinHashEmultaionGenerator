@@ -57,6 +57,7 @@ def main() -> None:
     session = cluster.connect(config.KEY_SPACE)
     # Number of bands 42
     for band_name in tqdm(BANDS, desc="Generating bands:"):
+        print("-------- BAND: " + band_name + " --------")
         result = get_values_from_band(session, band_name)
         create_csv_band(band_name, result.current_rows)
 
@@ -73,12 +74,14 @@ def create_csv_band(band_name: str, rows: tuple) -> None:
     writer.writerows(data)
     del data
     # Count of rows see config.COUNT_UNQ_MHS
+    count_row = 1
     for row in tqdm(rows, desc="Copy minhashing:"):
+        print("-------- MINHASH #" + str(count_row) + " --------")
         variable = row.value.decode()
         key = base64.b64encode(row.key)
         data = []
         # Count of iteration 100 thousands
-        for i in tqdm(range(0, 100000), desc="Copy minhash:"):
+        for i in range(0, 100000):
             value_string = variable + "_" + str(i).zfill(5)
             value = base64.b64encode(value_string.encode())
             data.append([key.decode(), value.decode(), row.ts])
@@ -87,6 +90,7 @@ def create_csv_band(band_name: str, rows: tuple) -> None:
             if (i + 1) % 10000 == 0:
                 writer.writerows(data)
                 data = []
+        count_row += 1
     band_f_disc.close()
 
 
