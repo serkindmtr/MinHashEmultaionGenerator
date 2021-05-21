@@ -14,7 +14,7 @@ def main() -> None:
         for _ in range(200):
             rand_string = ''.join(random.choice(string.ascii_lowercase) for _ in range(5))
             file.append(rand_string)
-        files[iterator] = file
+        files.append(file)
         minhash.update_batch([s.encode('utf-8') for s in file])
         minhashes.append(("key" + str(iterator), minhash))
 
