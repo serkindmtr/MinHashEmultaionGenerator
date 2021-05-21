@@ -7,48 +7,48 @@ from tqdm import tqdm
 import config
 
 BANDS = [
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0000",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0001",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0002",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0003",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0004",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0005",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0006",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0007",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0008",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0009",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_000a",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_000b",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_000c",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_000d",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_000e",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_000f",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0010",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0011",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0012",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0013",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0014",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0015",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0016",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0017",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0018",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0019",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_001a",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_001b",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_001c",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_001d",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_001e",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_001f",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0020",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0021",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0022",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0023",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0024",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0025",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0026",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0027",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0028",
-    config.KEY_SPACE + ".lsh_" + config.BASE_NAME + "_bucket_0029"]
+    "lsh_" + config.BASE_NAME + "_bucket_0000",
+    "lsh_" + config.BASE_NAME + "_bucket_0001",
+    "lsh_" + config.BASE_NAME + "_bucket_0002",
+    "lsh_" + config.BASE_NAME + "_bucket_0003",
+    "lsh_" + config.BASE_NAME + "_bucket_0004",
+    "lsh_" + config.BASE_NAME + "_bucket_0005",
+    "lsh_" + config.BASE_NAME + "_bucket_0006",
+    "lsh_" + config.BASE_NAME + "_bucket_0007",
+    "lsh_" + config.BASE_NAME + "_bucket_0008",
+    "lsh_" + config.BASE_NAME + "_bucket_0009",
+    "lsh_" + config.BASE_NAME + "_bucket_000a",
+    "lsh_" + config.BASE_NAME + "_bucket_000b",
+    "lsh_" + config.BASE_NAME + "_bucket_000c",
+    "lsh_" + config.BASE_NAME + "_bucket_000d",
+    "lsh_" + config.BASE_NAME + "_bucket_000e",
+    "lsh_" + config.BASE_NAME + "_bucket_000f",
+    "lsh_" + config.BASE_NAME + "_bucket_0010",
+    "lsh_" + config.BASE_NAME + "_bucket_0011",
+    "lsh_" + config.BASE_NAME + "_bucket_0012",
+    "lsh_" + config.BASE_NAME + "_bucket_0013",
+    "lsh_" + config.BASE_NAME + "_bucket_0014",
+    "lsh_" + config.BASE_NAME + "_bucket_0015",
+    "lsh_" + config.BASE_NAME + "_bucket_0016",
+    "lsh_" + config.BASE_NAME + "_bucket_0017",
+    "lsh_" + config.BASE_NAME + "_bucket_0018",
+    "lsh_" + config.BASE_NAME + "_bucket_0019",
+    "lsh_" + config.BASE_NAME + "_bucket_001a",
+    "lsh_" + config.BASE_NAME + "_bucket_001b",
+    "lsh_" + config.BASE_NAME + "_bucket_001c",
+    "lsh_" + config.BASE_NAME + "_bucket_001d",
+    "lsh_" + config.BASE_NAME + "_bucket_001e",
+    "lsh_" + config.BASE_NAME + "_bucket_001f",
+    "lsh_" + config.BASE_NAME + "_bucket_0020",
+    "lsh_" + config.BASE_NAME + "_bucket_0021",
+    "lsh_" + config.BASE_NAME + "_bucket_0022",
+    "lsh_" + config.BASE_NAME + "_bucket_0023",
+    "lsh_" + config.BASE_NAME + "_bucket_0024",
+    "lsh_" + config.BASE_NAME + "_bucket_0025",
+    "lsh_" + config.BASE_NAME + "_bucket_0026",
+    "lsh_" + config.BASE_NAME + "_bucket_0027",
+    "lsh_" + config.BASE_NAME + "_bucket_0028",
+    "lsh_" + config.BASE_NAME + "_bucket_0029"]
 
 
 def main():
@@ -59,7 +59,7 @@ def main():
         result = get_values_from_band(session, band_name)
         create_csv_band(band_name, result.current_rows)
     #
-    # result = session.execute("select * fromconfig.KEY_SPACE +  .lsh_" + BASE_NAME + "_bucket_0000")
+    # result = session.execute("select * from lsh_" + BASE_NAME + "_bucket_0000")
     # # result.current_rows.0
     # data = ["first_name,last_name,city".split(","),
     #         "Tyrese,Hirthe,Strackeport".split(","),
@@ -79,11 +79,11 @@ def main():
 
 
 def get_values_from_band(session: Session, band: str) -> ResultSet:
-    return session.execute("select * from " + band)
+    return session.execute("select * from " + config.KEY_SPACE + "." + band)
 
 
 def create_csv_band(band_name: str, rows: tuple):
-    path = band_name + ".csv"
+    path = config.KEY_SPACE + "." + band_name + ".csv"
     data = ["key,value,ts".split(",")]
     band_f_disc = open(path, "w+", newline='')
     writer = csv.writer(band_f_disc, delimiter=',')
