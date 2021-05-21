@@ -2,6 +2,8 @@ import cassandra
 import base64
 import csv
 from cassandra.cluster import Cluster, Session, ResultSet
+from tqdm import tqdm
+
 import config
 
 BANDS = [
@@ -53,7 +55,7 @@ def main():
     cluster = Cluster()
     session = cluster.connect(config.KEY_SPACE)
     # Number of bands 42
-    for band_name in BANDS:
+    for band_name in tqdm(BANDS, desc="Generating bands:"):
         result = get_values_from_band(session, band_name)
         create_csv_band(band_name, result.current_rows)
     #
@@ -88,12 +90,12 @@ def create_csv_band(band_name: str, rows: tuple):
     writer.writerows(data)
     del data
     # Count of rows see config.COUNT_UNQ_MHS
-    for row in rows:
+    for row in tqdm(rows, desc="Copy minhashing:"):
         variable = row.value.decode()
         key = base64.b64encode(row.key)
         data = []
         # Count of iteration 100 millions
-        for i in range(0, 100):
+        for i in tqdm(range(0, 100), desc="Copy minhash:"):
             value_string = variable + "_" + str(i).zfill(5)
             value = base64.b64encode(value_string.encode())
             data.append([key.decode(), value.decode(), row.ts])
