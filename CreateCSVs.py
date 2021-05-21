@@ -83,7 +83,8 @@ def create_csv_band(band_name: str, rows: tuple) -> None:
             value = base64.b64encode(value_string.encode())
             data.append([key.decode(), value.decode(), row.ts])
 
-            if (i + 1) % 10 == 0:
+            # Writing to csv batch size of 10000
+            if (i + 1) % 10000 == 0:
                 writer.writerows(data)
                 data = []
     band_f_disc.close()
