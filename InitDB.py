@@ -1,5 +1,6 @@
 import random
 import string
+import config
 from tqdm import tqdm
 from datasketch import MinHash, MinHashLSH
 
@@ -7,7 +8,7 @@ from datasketch import MinHash, MinHashLSH
 def main():
     minhashes = []
     files = []
-    for iterator in tqdm(range(100), desc="Generate minHashes:"):
+    for iterator in tqdm(range(config.COUNT_UNQ_MHS), desc="Generate minHashes:"):
         minhash = MinHash(num_perm=256)
         file = []
         for _ in range(200):
@@ -22,7 +23,7 @@ def main():
             'basename': b'perftest',
             'cassandra': {
                 'seeds': ['127.0.0.1'],
-                'keyspace': 'lsh_test_100_mln',
+                'keyspace': config.KEY_SPACE,
                 'replication': {
                     'class': 'SimpleStrategy',
                     'replication_factor': '1',
