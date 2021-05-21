@@ -38,12 +38,12 @@ def main():
             for key, minhash in minhashes:
                 session.insert(key, minhash)
 
-    f_disc_mhs = open('log/minhashes.txt', 'w+')
+    f_disc_mhs = open('minhashes.txt', 'w+')
     for minhash in tqdm(minhashes, desc="Log minHashes:"):
         log(f_disc_mhs, minhash[0], minhash[1].digest())
     f_disc_mhs.close()
 
-    f_disc_files = open('log/files.txt', 'w+')
+    f_disc_files = open('files.txt', 'w+')
     for iterator in tqdm(range(len(files)), desc="Log files:"):
         log(f_disc_files, minhashes[iterator][0], files[iterator])
     f_disc_mhs.close()
