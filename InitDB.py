@@ -1,6 +1,3 @@
-# Эксперимент:
-# Заполняем 100k minHash-ей в Cassandra
-# Смотрим время заполнения и время поиска
 import random
 import string
 from tqdm import tqdm
@@ -8,7 +5,6 @@ from datasketch import MinHash, MinHashLSH
 
 
 def main():
-    # Генерация list-а минхешей, где ["Ключ МинХэша", ОбъектMinHash]
     minhashes = []
     files = []
     for iterator in tqdm(range(100), desc="Generate minHashes:"):
@@ -19,7 +15,7 @@ def main():
             file.append(rand_string)
         minhash.update_batch([s.encode('utf-8') for s in file])
         minhashes.append(("key" + str(iterator), minhash))
-    # Подключаем бд Кассандру
+
     lsh = MinHashLSH(
         threshold=0.5, num_perm=256, storage_config={
             'type': 'cassandra',
@@ -36,19 +32,17 @@ def main():
             }
         }
     )
-    # Вставляем 100k минхэшей в базу
+
     for _ in tqdm(range(1), desc="Insert 100 minHashes:"):
         with lsh.insertion_session(buffer_size=100) as session:
             for key, minhash in minhashes:
                 session.insert(key, minhash)
 
-    # Логируем созданные минхеши
     f_disc_mhs = open('log/minhashes.txt', 'w+')
     for minhash in tqdm(minhashes, desc="Log minHashes:"):
         log(f_disc_mhs, minhash[0], minhash[1].digest())
     f_disc_mhs.close()
 
-    # Логируем созданные файлы
     f_disc_files = open('log/files.txt', 'w+')
     for iterator in tqdm(range(len(files)), desc="Log files:"):
         log(f_disc_files, minhashes[iterator][0], files[iterator])
