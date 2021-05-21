@@ -7,6 +7,8 @@ def main():
     f_disc.writelines(['#!/bin/bash\n'])
     data = []
     for band_name in CreateCSVs.BANDS:
+        note = "echo \"----- START " + band_name + " -----\" \n"
+        data.append(note)
         line = "dsbulk load -url " + config.KEY_SPACE + "." + band_name + ".csv -k " + config.KEY_SPACE + " -t " + band_name + "\n"
         data.append(line)
     f_disc.writelines(data)
