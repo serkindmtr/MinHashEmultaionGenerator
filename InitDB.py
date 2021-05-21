@@ -5,7 +5,7 @@ from tqdm import tqdm
 from datasketch import MinHash, MinHashLSH
 
 
-def main():
+def main() -> None:
     minhashes = []
     files = []
     for iterator in tqdm(range(config.COUNT_UNQ_MHS), desc="Generate minHashes:"):
@@ -14,6 +14,7 @@ def main():
         for _ in range(200):
             rand_string = ''.join(random.choice(string.ascii_lowercase) for _ in range(5))
             file.append(rand_string)
+        files[iterator] = file
         minhash.update_batch([s.encode('utf-8') for s in file])
         minhashes.append(("key" + str(iterator), minhash))
 
@@ -50,8 +51,8 @@ def main():
     f_disc_mhs.close()
 
 
-def log(f_disc, key: str, signature: tuple):
-    mh_info = '# ' + key + ' SIG: ' + str(signature)
+def log(f_disc, key: str, signature: list) -> None:
+    mh_info = '# ' + key + ' SIG: ' + str(signature) + '\n'
     f_disc.write(mh_info)
 
 

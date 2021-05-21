@@ -2,7 +2,7 @@ import CreateCSVs
 import config
 
 
-def main():
+def main() -> None:
     f_disc = open('dsbulk_script', 'w+')
     f_disc.writelines(['#!/bin/bash\n'])
     data = []

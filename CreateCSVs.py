@@ -48,41 +48,24 @@ BANDS = [
     "lsh_" + config.BASE_NAME + "_bucket_0026",
     "lsh_" + config.BASE_NAME + "_bucket_0027",
     "lsh_" + config.BASE_NAME + "_bucket_0028",
-    "lsh_" + config.BASE_NAME + "_bucket_0029"]
+    "lsh_" + config.BASE_NAME + "_bucket_0029"
+]
 
 
-def main():
+def main() -> None:
     cluster = Cluster()
     session = cluster.connect(config.KEY_SPACE)
     # Number of bands 42
     for band_name in tqdm(BANDS, desc="Generating bands:"):
         result = get_values_from_band(session, band_name)
         create_csv_band(band_name, result.current_rows)
-    #
-    # result = session.execute("select * from lsh_" + BASE_NAME + "_bucket_0000")
-    # # result.current_rows.0
-    # data = ["first_name,last_name,city".split(","),
-    #         "Tyrese,Hirthe,Strackeport".split(","),
-    #         "Jules,Dicki,Lake Nickolasville".split(","),
-    #         "Dedric,Medhurst,Stiedemannberg".split(",")
-    #         ]
-    # path = "output.csv"
-    # # csv_writer(["key,value,ts".split(",")], path)
-    # data = ["key,value,ts".split(",")]
-    # for row in result.current_rows:
-    #     for i in range(0, 100):
-    #         variable = str(i) + "_" + row.value.decode()
-    #         key = base64.b64encode(row.key)
-    #         value = base64.b64encode(variable.encode())
-    #         data.append([key.decode(), value.decode(), row.ts])
-    # csv_writer(data, path)
 
 
 def get_values_from_band(session: Session, band: str) -> ResultSet:
     return session.execute("select * from " + config.KEY_SPACE + "." + band)
 
 
-def create_csv_band(band_name: str, rows: tuple):
+def create_csv_band(band_name: str, rows: tuple) -> None:
     path = config.KEY_SPACE + "." + band_name + ".csv"
     data = ["key,value,ts".split(",")]
     band_f_disc = open(path, "w+", newline='')
@@ -94,8 +77,8 @@ def create_csv_band(band_name: str, rows: tuple):
         variable = row.value.decode()
         key = base64.b64encode(row.key)
         data = []
-        # Count of iteration 100 millions
-        for i in tqdm(range(0, 100), desc="Copy minhash:"):
+        # Count of iteration 100 thousands
+        for i in tqdm(range(0, 100000), desc="Copy minhash:"):
             value_string = variable + "_" + str(i).zfill(5)
             value = base64.b64encode(value_string.encode())
             data.append([key.decode(), value.decode(), row.ts])
@@ -104,21 +87,6 @@ def create_csv_band(band_name: str, rows: tuple):
                 writer.writerows(data)
                 data = []
     band_f_disc.close()
-
-
-# def init_csv(band_name: str) -> None:
-#     path = band_name + ".csv"
-#     data = ["key,value,ts".split(",")]
-#     csv_writer(data, path)
-#
-#
-# def csv_writer(data, path) -> None:
-#     """
-#     Write data to a CSV file path
-#     """
-#     with open(path, "w+", newline='') as csv_file:
-#         writer = csv.writer(csv_file, delimiter=',')
-#         writer.writerows(data)
 
 
 if __name__ == "__main__":
